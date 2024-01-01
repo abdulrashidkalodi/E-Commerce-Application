@@ -1,10 +1,7 @@
 import Container from "./components/Container";
 import HomeBanner from "./components/HomeBanner";
 import { products } from "@/utils/products";
-import trucateText from "@/utils/truncateText";
 import ProductCard from "./components/products/ProductCard";
-import Image from "next/image";
-
 export default function Home() {
   return (
     <div>

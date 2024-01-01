@@ -1,6 +1,6 @@
 "use client";
 import formatePrice from "@/utils/formatePrice";
-import trucateText from "@/utils/truncateText";
+import truncateText from "@/utils/truncateText";
 import { Rating } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -28,7 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
             className="w-full h-full object-contain"
           />{" "}
         </div>
-        <div className="mt-4">{trucateText(data.name)}</div>
+        <div className="mt-4">{truncateText(data.name)}</div>
         <div>
           <Rating value={productRating} readOnly />
         </div>
