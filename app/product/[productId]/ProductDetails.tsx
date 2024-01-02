@@ -1,7 +1,9 @@
 "use client";
+import Button from "@/app/components/Button";
 import SetColor from "@/app/components/products/SetColor";
+import SetQuantity from "@/app/components/products/SetQuantity";
 import truncateText from "@/utils/truncateText";
-import { Rating } from "@mui/material";
+import { Icon, Rating } from "@mui/material";
 import { useCallback, useState } from "react";
 interface ProductDetailsProps {
   product: any;
@@ -36,11 +38,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     price: product.price,
   });
   console.log(cartProduct);
-  
+
   const productRating =
     product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     product.reviews.length;
-
+  //colore selection function
   const handleColorSelect = useCallback(
     (value: SelectedImgType) => {
       setCartProduct((prev) => {
@@ -52,6 +54,24 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     },
     [cartProduct.selectedImg]
   );
+  //increse thre quantity
+  const handleQtyIncrease = useCallback(() => {
+    if (cartProduct.quantity === 99) {
+      return;
+    }
+    setCartProduct((prev) => {
+      return { ...prev, quantity: prev.quantity + 1 };
+    });
+  }, [cartProduct]);
+  //decrease the quatity
+  const handleQtyDecrease = useCallback(() => {
+    if (cartProduct.quantity === 1) {
+      return;
+    }
+    setCartProduct((prev) => {
+      return { ...prev, quantity: prev.quantity - 1 };
+    });
+  }, [cartProduct]);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
       <div>image</div>
@@ -85,9 +105,15 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           handleColorSelect={handleColorSelect}
         />
         <Horizontal />
-        <div>quntitie </div>
+        <SetQuantity
+          cartProduct={cartProduct}
+          handleQtyDecrease={handleQtyDecrease}
+          handleQtyIncrease={handleQtyIncrease}
+        />
         <Horizontal />
-        <div> button</div>
+        <div className="max-w-[300px]">
+          <Button label="Add to Cart" onClick={() => {}} />
+        </div>
       </div>
     </div>
   );
