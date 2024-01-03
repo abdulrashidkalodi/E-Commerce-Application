@@ -41,7 +41,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
           );
         })}
       </div>
-      <div className="cols-span-5 relative aspect-square">
+      <div className="col-span-5 relative aspect-square">
         <Image
           fill
           src={cartProduct.selectedImg.image}
