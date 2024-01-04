@@ -4,7 +4,6 @@ import {
   CartProductType,
   SelectedImgType,
 } from "@/app/product/[productId]/ProductDetails";
-import { ClassNames } from "@emotion/react";
 import Image from "next/image";
 
 interface ProductImageProps {

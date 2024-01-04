@@ -11,7 +11,10 @@ const NavBar = () => {
       <div className="py-4 border-b-[1px] ">
         <Container>
           <div className="flex items-center justify-between gap-3 md:gap-0">
-            <Link href={"/"} className={`${Redresse.className} font-bold text-2xl`}>
+            <Link
+              href={"/"}
+              className={`${Redresse.className} font-bold text-2xl`}
+            >
               {" "}
               eshopi{" "}
             </Link>
