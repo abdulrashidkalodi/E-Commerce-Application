@@ -4,8 +4,9 @@ import "./globals.css";
 import NavBar from "./components/nav/NavBar";
 import Footer from "./components/Footer/Footer";
 import CartProvider from "@/providers/CartProvider";
+import { Toaster } from "react-hot-toast";
 
-const Poppin = Poppins({ subsets: ["latin"], weight: ['400', '700'] });
+const Poppin = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,15 +21,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${Poppin.className}text-slate-700`}>
-
+        <Toaster
+          toastOptions={{
+            style: {
+              background: "rgb(51 65 85)",
+              color: "#fff",
+            },
+          }}
+        />
         <CartProvider>
           <div className="flex flex-col min-h-screen">
-            <NavBar/>
+            <NavBar />
             <main className="flex-grow">{children}</main>
             <Footer />
           </div>
         </CartProvider>
-        </body>
+      </body>
     </html>
   );
 }
