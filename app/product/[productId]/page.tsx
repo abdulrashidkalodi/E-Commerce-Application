@@ -15,7 +15,6 @@ const Product = ({ params }: { params: IPrams }) => {
         <ProductDetails product={product} />
         <div className="flex flex-col mt-20 gap-4">
           <ListRating product={product} />
-          <div>rationg</div>
         </div>
       </Container>
     </div>
