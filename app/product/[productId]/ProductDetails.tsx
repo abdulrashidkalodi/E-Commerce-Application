@@ -48,7 +48,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     setIsProductInCart(false);
 
     if (cartProducts) {
-      const existingIndex = cartProducts?.findIndex(
+      const existingIndex = cartProducts.findIndex(
         (item) => item.id === product.id
       );
       if (existingIndex > -1) {
@@ -57,7 +57,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     }
   }, [cartProducts]);
   console.log(cartProducts);
-  
 
   const productRating =
     product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /

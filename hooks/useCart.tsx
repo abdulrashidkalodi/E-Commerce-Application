@@ -13,6 +13,8 @@ type CartContextType = {
   cartProducts: CartProductType[] | null;
   handleAddProductToCart: (product: CartProductType) => void;
   handleRemoveProductFromCart: (product: CartProductType) => void;
+  handleCartQtyIncrease: (product: CartProductType) => void;
+  handleCartQtyDecrease: (product: CartProductType) => void;
 };
 
 export const CartContext = createContext<CartContextType | null>(null);
@@ -55,7 +57,7 @@ export const CartContextProvider = (props: Props) => {
           return item.id !== product.id;
         });
         setCartProducts(filteredProducts);
-        toast.error("product removed");
+        toast.success("product removed");
         localStorage.setItem(
           "eShopCartItems",
           JSON.stringify(filteredProducts)
@@ -64,12 +66,57 @@ export const CartContextProvider = (props: Props) => {
     },
     [cartProducts]
   );
+  const handleCartQtyIncrease = useCallback(
+    (product: CartProductType) => {
+      let updatedCart;
 
+      if (product.quantity === 99) {
+        return toast.error("oops max reached");
+      }
+      if (cartProducts) {
+        updatedCart = [...cartProducts];
+        const existingIndex = cartProducts.findIndex(
+          (item) => item.id === product.id
+        );
+        if (existingIndex > -1) {
+          updatedCart[existingIndex].quantity = ++updatedCart[existingIndex]
+            .quantity;
+        }
+        setCartProducts(updatedCart);
+        localStorage.setItem("eShopCartItems", JSON.stringify(updatedCart));
+      }
+    },
+    [cartProducts]
+  );
+  const handleCartQtyDecrease = useCallback(
+    (product: CartProductType) => {
+      let updatedCart;
+
+      if (product.quantity === 1) {
+        return toast.error("oops min reached");
+      }
+      if (cartProducts) {
+        updatedCart = [...cartProducts];
+        const existingIndex = cartProducts.findIndex(
+          (item) => item.id === product.id
+        );
+        if (existingIndex > -1) {
+          updatedCart[existingIndex].quantity = --updatedCart[existingIndex]
+            .quantity;
+        }
+        setCartProducts(updatedCart);
+        localStorage.setItem("eShopCartItems", JSON.stringify(updatedCart));
+      }
+    },
+    [cartProducts]
+  );
   const value = {
     cartTotelQty,
     cartProducts,
     handleAddProductToCart,
     handleRemoveProductFromCart,
+    handleCartQtyIncrease,
+    handleCartQtyDecrease,
   };
   return <CartContext.Provider value={value} {...props} />;
 };
