@@ -40,8 +40,8 @@ export const CartContextProvider = (props: Props) => {
       } else {
         updatedCart = [product];
       }
-    
-      toast.success('product added to cart')
+
+      toast.success("product added to cart");
       localStorage.setItem("eShopCartItems", JSON.stringify(updatedCart));
       return updatedCart;
     });
