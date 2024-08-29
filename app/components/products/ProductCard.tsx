@@ -8,11 +8,13 @@ interface ProductCardProps {
   data: any;
 }
 const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
+  // dynamic routing  
   const router = useRouter();
   const productRating =
     data.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     data.reviews.length;
   return (
+    // get id for dynamic routing 
     <div
       onClick={() => {
         router.push(`/product/${data.id}`);
@@ -23,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
         <div className="aspect-square overflow-hidden relative w-full">
           <Image
             fill
-            alt="no imagefound"
+            alt={truncateText(data.name)}
             src={data.images[0].image}
             className="w-full h-full object-contain"
           />{" "}

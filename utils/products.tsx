@@ -1,3 +1,5 @@
+// this was a array of object
+
 export const products = [
   {
     id: "64a654593e91b8e73a351e9b",
